@@ -43,9 +43,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'todos',
+    'todos.apps.TodosConfig',
+    'leads.apps.LeadsConfig',
 ]
 
+# For production use-cases it's a good idea to disable the browseable API in production
+# using the following ocnfiguration
+# 'DEFAULT_RENDERER_CLASSES': (
+#         'rest_framework.renderers.JSONRenderer',
+#     )
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',

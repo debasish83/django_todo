@@ -27,16 +27,50 @@ class App extends Component {
         super(props);
         // initialize todos with empty array
         this.state = {
-            todos: []
+            todos: [],
+            leads: [],
+            loaded: false,
+            placeholder: "Loading"
         };
     }
 
     // do an DRF API call whenever the component mounts and
     // fetch the latest todos from API
     // use react fetch or axios can be used as well
-    async componentDidMount() {
+    componentDidMount() {
+        fetch("http://127.0.0.1:8000/api/leads")
+            .then(response => {
+                if (response.status > 400) {
+                    return this.setState({placeholder: "Something went wrong"});
+                }
+                return response.json()
+            })
+            .then(data => {
+                this.setState(() => {
+                    return {
+                        leads: data,
+                        loaded: true
+                    };
+                });
+            })
+        fetch("http://127.0.0.1:8000/api/todos")
+            .then(response => {
+                if (response.status > 400) {
+                    return this.setState({placeholder: "Something went wrong"});
+                }
+                return response.json()
+            })
+            .then(data => {
+                this.setState(() => {
+                    return {
+                        todos: data,
+                        loaded: true
+                    };
+                });
+            })
+        /* await is a blocking call on a API, it's not a good idea
+           use axios or fetch with callbacks
         try {
-            // await is a blocking call on a API, it's not a good idea
             // use axios
             const res = await fetch('http://127.0.0.1:8000/api');
             const todos = await res.json();
@@ -45,7 +79,7 @@ class App extends Component {
             this.setState({todos});
         } catch (e) {
             console.log(e);
-        }
+        }*/
     }
 
     // For each div use a className to decorate css and also associate an unique
@@ -53,12 +87,17 @@ class App extends Component {
     render() {
         return (
             <div>
-                {this.state.todos.map(item => (
-                    <div className={"item"} key={item.id}>
-                        <h1>{item.title}</h1>
-                        <span>{item.description}</span>
+                {this.state.todos.map(todo => (
+                    <div className={"todo"} key={todo.id}>
+                        <h1>{todo.title}</h1>
+                        <span>{todo.description}</span>
                     </div>
                     ))}
+                    <ul>
+                        {this.state.leads.map(contact => (
+                            <li key={contact.id}>{contact.name} - {contact.email}</li>
+                        ))}
+                    </ul>
             </div>
         );
     }
