@@ -8,13 +8,13 @@ and use session/JWT based authentication https://www.valentinog.com/blog/webpack
 ## Setup Django
 Setup a python virtual environment using python3 -m venv cmle_env
 pip install the following packages
-- Django==3.1.4
-- django-cors-headers==3.6.0
-- djangorestframework==3.12.2
+Django==3.1.4
+django-cors-headers==3.6.0
+djangorestframework==3.12.2
 
 - Our react app running on localhost:3000 calls django API running on localhost:8000
 To enable cross original resource sharing, CORS package is used
-Create a todo app using django-admin startapp todos
+- Create a todo app using django-admin startapp todos
 It's possible to create multiple apps in django
 We can create leads app using django-admin startapp leads
 
@@ -47,11 +47,11 @@ authentication for registering and logging in users.
 If we are building a OKTA enabled app then most likely we will need tokens and JWT for enterprise isolation 
 
 ## Setup React
-Create a ui folder to include the code related to javascript SPA
+- Create a ui folder to include the code related to javascript SPA
 Install npm. 7.3.0 is installed by default
 npm install -g create-react-app
 Launch the app using npm start
-Prepare a directory strucuture for holding React compeonts: mkdir -p ./ui/src/components
+- Prepare a directory structure for holding React compeonts: mkdir -p ./ui/src/components
 Add the static files inside mkdir -p ./ui/{static, templates}/ui
 Install webpage and webpack cli: npm i webpack webpack-cli --save-dev
 We open up package.json and configure two scripts for production and development
