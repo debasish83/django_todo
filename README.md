@@ -8,9 +8,9 @@ and use session/JWT based authentication https://www.valentinog.com/blog/webpack
 ## Setup Django
 Setup a python virtual environment using python3 -m venv cmle_env
 pip install the following packages
-Django==3.1.4\
-django-cors-headers==3.6.0\
-djangorestframework==3.12.2\
+Django==3.1.4  
+django-cors-headers==3.6.0  
+djangorestframework==3.12.2  
 
 - Our react app running on localhost:3000 calls django API running on localhost:8000
 To enable cross original resource sharing, CORS package is used
