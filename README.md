@@ -8,10 +8,11 @@ and use session/JWT based authentication https://www.valentinog.com/blog/webpack
 ## Setup Django
 Setup a python virtual environment using python3 -m venv cmle_env
 pip install the following packages
+
 Django==3.1.4
 django-cors-headers==3.6.0
 djangorestframework==3.12.2
-django runs on 
+ 
 Our react app running on localhost:3000 calls django API running on localhost:8000
 To enable cross original resource sharing, CORS package is used
 Create a todo app using django-admin startapp todos
@@ -36,10 +37,13 @@ see the report on cmdline using: coverage report
 There are many different ways for setting up Django project with react. There are few patterns
 Option 1: React in its own "frontend" django app: load a single html template and let react 
 manage the frontend (difficult: medium)
+
 Option 2: Django REST as a standalone API and React as standalone SPA (difficulty: hard, it involves
 some form of token-based authentication)
+
 Option 3: Mix & Match: mini React apps inside Django templates (difficult: simple but not so maintainable
 in the long run)
+
 We will setup react SPA as a "ui" Django app following Option2.
 Keeping React closer to Django makes easier to reson about authentication. We can use Django builtin 
 authentication for registering and logging in users.
