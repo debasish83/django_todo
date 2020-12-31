@@ -25,18 +25,40 @@ python manage.py makemigrations app=todos/leads
 Finally migrate the database with: python manage.py migrate
 
 ## Django Testing
-- There is not point in testing a vanilla Django model or Django ORM
+There is not point in testing a vanilla Django model or Django ORM
 If we have added a custom method to Django model test it
 If we have added a custom view test it
-- pip install coverage and run the coverage using: coverage run --source='.' manage.py test
+pip install coverage and run the coverage using: coverage run --source='.' manage.py test
 generate the report using: coverage html
 see the report on cmdline using: coverage report
+
+## Django and React Together
+There are many different ways for setting up Django project with react. There are few patterns
+- Option 1: React in its own "frontend" django app: load a single html template and let react 
+manage the frontend (difficult: medium)
+- Option 2: Django REST as a standalone API and React as standalone SPA (difficulty: hard, it involves
+some form of token-based authentication)
+- Option 3: Mix & Match: mini React apps inside Django templates (difficult: simple but not so maintainable
+in the long run)
+
+We will setup react SPA as a "ui" Django app following Option2.
+Keeping React closer to Django makes easier to reson about authentication. We can use Django builtin 
+authentication for registering and logging in users.
+If we are building a OKTA enabled app then most likely we will need tokens and JWT for enterprise isolation 
 
 ## Setup React
 - Create a ui folder to include the code related to javascript SPA
 Install npm. 7.3.0 is installed by default
 npm install -g create-react-app
-Launch the app using npm start. 
+Launch the app using npm start
+- Prepare a directory structure for holding React compeonts: mkdir -p ./ui/src/components
+Add the static files inside mkdir -p ./ui/{static, templates}/ui
+Install webpage and webpack cli: npm i webpack webpack-cli --save-dev
+We open up package.json and configure two scripts for production and development
+Let's install babel for transpiling our code:
+npm i @babel/core babel-loader @babel/preset-env @babel/preset-react --save-dev
+Pull in react using: npm i react react-dom --save-dev
+After that we configure babel with a .babelrc inside ./ui
 
 ## Launch Django
 python manage.py runserver launches the django API at localhost:8000
@@ -52,22 +74,4 @@ As projects grow it make more sense to decouple backend and frontend. WE need to
 as well. If frontend and backend are in the same domain (or same server) we can use authentication based on
 session. If they are in different domain then we need tokens/JWT 
 
-## Django and React Deployment
-For deploying react with django 2 modes are popular
-
-- Hybrid app: Prepare a directory structure for holding React components: mkdir -p ./ui/src/components
-Add the static files inside mkdir -p ./ui/{static, templates}/ui
-Install webpage and webpack cli: npm i webpack webpack-cli --save-dev
-We open up package.json and configure two scripts for production and development
-Let's install babel for transpiling our code:
-npm i @babel/core babel-loader @babel/preset-env @babel/preset-react --save-dev
-Pull in react using: npm i react react-dom --save-dev
-After that we configure babel with a .babelrc inside ./ui
-Related article using yarn: https://fractalideas.com/blog/making-react-and-django-play-well-together-hybrid-app-model/
-
-- Single page app model: Deploy ui and backend on different domains and let them communicate using session
-and token (JWT) based authorization
-https://fractalideas.com/blog/making-react-and-django-play-well-together-single-page-app-model/
-
-We will follow Single page app model since social oauth and OKTA auth play a key role in our application
 
