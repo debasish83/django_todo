@@ -17,9 +17,9 @@ Install npm. 7.3.0 is installed by default
 npm install -g create-react-app
 Launch the app using npm start
 
-##Launch Django
+## Launch Django
 python manage.py runserver launches the django API at localhost:8000
 
-##Launch React
+## Launch React
 npm start launches the react App at localhost:3000
 
