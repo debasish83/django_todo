@@ -1,0 +1,21 @@
+<!-- html:5 and press tab pycharm will complete it -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!-- html is static, we will add data from django and pump it to html -->
+<body>
+    <h1>This is movie template</h1>
+    <!-- use jinja templates to display dynamic data -->
+    {% for movie in movies %}
+        {% if movie.is_published %}
+        <h2>{{movie.title}}</h2>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

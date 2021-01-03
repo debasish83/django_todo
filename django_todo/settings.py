@@ -42,9 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    # To register users we should use authtoken app
+    'rest_framework.authtoken',
     'corsheaders',
     'todos.apps.TodosConfig',
     'leads.apps.LeadsConfig',
+    'movies.apps.MoviesConfig',
+    'movierater.apps.MovieraterConfig',
 ]
 
 # For production use-cases it's a good idea to disable the browseable API in production
@@ -54,7 +58,10 @@ INSTALLED_APPS = [
 #     )
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        # to allow anyone to have permission to REST call
+        # 'rest_framework.permissions.AllowAny',
+        # to allow only users who have a valid token
+        'rest_framework.permissions.IsAuthenticated',
     ]
 }
 
@@ -80,7 +87,7 @@ ROOT_URLCONF = 'django_todo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,9 +1,10 @@
 ## React Django Todo+Leads App
-The app is based on 3 tutorial
+The apps are based on 3 tutorials
 1. https://wsvincent.com/django-rest-framework-react-tutorial/
 2. https://www.valentinog.com/blog/drf/
 3. As the React App increases in size, consider deploying ui and backend separately
 and use session/JWT based authentication https://www.valentinog.com/blog/webpack-django/
+4. Udemy course on Django/React full stack development
 
 ## Setup Django
 Setup a python virtual environment using python3 -m venv cmle_env
@@ -70,4 +71,3 @@ and token (JWT) based authorization
 https://fractalideas.com/blog/making-react-and-django-play-well-together-single-page-app-model/
 
 We will follow Single page app model since social oauth and OKTA auth play a key role in our application
-
