@@ -65,4 +65,5 @@ similar component library
 
 - For GCP and AWS Deployment of React/Django apps, idea is to use GCP App Engine / AWS Elastic 
 Beanstalk using hosted mysql, use hosted services like task-queues, BQ/Redshift, 
-bigtable/dynamo-db and ai-platform/tf-cluster.
+bigtable/dynamo-db and ai-platform/sagemaker. If cost becomes a concern for 
+BQ/Redshift then plan to use django, spark & tf on kubernetes.
