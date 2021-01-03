@@ -60,5 +60,9 @@ movies using form
 - MovieRater UI is a typical CRUD application with create, read, update and delete 
 workflows. Now we need to support user authentication and user registering
 
-- Style the application and do some refactoring. Here we plan to use material-ui,
- 
+- Style the application and do some refactoring. Here we plan to use material-ui or
+similar component library
+
+- For GCP and AWS Deployment of React/Django apps, idea is to use GCP App Engine / AWS Elastic 
+Beanstalk using hosted mysql, use hosted services like task-queues, BQ/Redshift, 
+bigtable/dynamo-db and ai-platform/tf-cluster.
