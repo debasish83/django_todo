@@ -67,4 +67,4 @@ similar component library
 Beanstalk using hosted mysql, use hosted services like pub-sub/kinesis, cloud-functions/aws-lambda
 for async processing, Bigquery/Redshift for datawarehouse, bigtable/dynamo-db for no-sql store and 
 ai-platform/sagemaker for machine learning.
-If BQ/Redshift cost becomes a concern for then plan to use django, spark & tf on kubernetes.
+If BQ/Redshift cost becomes a concern then plan to use django, spark & tf on kubernetes.
