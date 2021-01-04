@@ -5,9 +5,22 @@ import MovieDetails from './components/moviedetails';
 import MovieForm from './components/movieform';
 import './App.css';
 import {useCookies} from "react-cookie";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faEdit, faFilm, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import {faEdit, faFilm, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import {useFetch} from './hooks/useFetch'
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon  from '@material-ui/icons/Menu';
+import { makeStyles } from '@material-ui/core/styles';
+import MovieIcon from '@material-ui/icons/Movie';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 function App() {
     const [movies, setMovies] = useState(['movie1', 'movie2']);
@@ -15,6 +28,7 @@ function App() {
     const [editedMovie, setEditedMovie] = useState(null);
     const [token, setToken, deleteToken] = useCookies(['mr-token']);
     const [data, loading, error] = useFetch();
+    const [value, setValue] = React.useState(0);
 
     // With REST we have to fetch all the objects and every field related to the
     // object. With graphql we can pull only specific fields that are needed from
@@ -35,6 +49,18 @@ function App() {
             .catch(error => console.log(error))
     }, [])
      */
+
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            flexGrow: 1,
+        },
+        menuButton: {
+            marginRight: theme.spacing(2),
+        },
+        title: {
+            flexGrow: 1,
+        },
+    }));
 
     useEffect(() => {
         setMovies(data);
@@ -95,6 +121,8 @@ function App() {
         deleteToken('mr-token');
     }
 
+    const classes = useStyles();
+
     if(loading) return <h1>Loading...</h1>
     if(error) return <h1>Error Loading Movies </h1>
 
@@ -102,14 +130,30 @@ function App() {
     // column and we need to change the layout
     // className=layout setup the grid layout with 2 columns. If we add 3 components
     // it will overflow into 3 columns
+
+    //faFilm icon was rotated using css
+    /*<h1>
+        <FontAwesomeIcon icon={faFilm}/>
+        <span>Movie Rater</span>
+        <FontAwesomeIcon icon={faSignOutAlt} onClick={logoutUser}/>
+    </h1>
+    */
+
     return (
         <div className="App">
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" className={classes.menuButton} aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" className={classes.title}>
+                        <MovieIcon />
+                        <span>Movie Rater</span>
+                    </Typography>
+                    <Button color="inherit" onClick={logoutUser}>Login</Button>
+                </Toolbar>
+            </AppBar>
             <header className="App-header">
-                <h1>
-                    <FontAwesomeIcon icon={faFilm}/>
-                    <span>Movie Rater</span>
-                    <FontAwesomeIcon icon={faSignOutAlt} onClick={logoutUser}/>
-                </h1>
                 <div className={"layout"}>
                     <div>
                         <MovieList movies={movies}
@@ -117,7 +161,7 @@ function App() {
                                    editClicked={editClicked}
                                    removeClicked={removeClicked}
                         />
-                        <button onClick={newMovie}>New Movie</button>
+                        <Button color="secondary" onClick={newMovie}>New Movie</Button>
                     </div>
                     <MovieDetails movie={selectedMovie} updateMovie={loadMovie}/>
                     { editedMovie ? <MovieForm movie={editedMovie}
@@ -125,6 +169,18 @@ function App() {
                                                movieCreated={movieCreated}/> : null }
                 </div>
             </header>
+            <BottomNavigation
+                value={value}
+                onChange={(event, newValue) => {
+                    setValue(newValue);
+                }}
+                showLabels
+                className={classes.root}
+            >
+                <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+                <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+                <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+            </BottomNavigation>
         </div>
     );
 }
